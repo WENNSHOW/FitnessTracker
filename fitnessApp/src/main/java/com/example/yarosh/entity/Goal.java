@@ -1,6 +1,7 @@
 package com.example.yarosh.entity;
 
 
+import com.example.yarosh.dto.GoalDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,4 +25,16 @@ public class Goal {
     private Date endDate;
 
     private boolean achieved;
+
+    public GoalDTO getGoalDTO() {
+        GoalDTO goalDTO = new GoalDTO();
+
+        goalDTO.setId(id);
+        goalDTO.setDescription(description);
+        goalDTO.setStartDate(startDate);
+        goalDTO.setEndDate(endDate);
+        goalDTO.setAchieved(achieved);
+
+        return goalDTO;
+    }
 }
