@@ -6,6 +6,9 @@ import com.example.yarosh.repository.WorkoutRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class WorkoutServiceImpl implements WorkoutService {
@@ -22,6 +25,13 @@ public class WorkoutServiceImpl implements WorkoutService {
         workout.setCaloriesBurned(workoutDTO.getCaloriesBurned());
 
         return workoutRepository.save(workout).getWorkoutDTO();
+    }
+
+    @Override
+    public List<WorkoutDTO> getWorkouts(){
+        List<Workout> workouts = workoutRepository.findAll();
+
+        return workouts.stream().map(Workout::getWorkoutDTO).collect(Collectors.toList());
     }
 
 
