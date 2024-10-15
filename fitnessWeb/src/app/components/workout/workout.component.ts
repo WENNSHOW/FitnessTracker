@@ -20,6 +20,8 @@ export class WorkoutComponent {
 
   workoutForm!: FormGroup;
 
+  workouts: any;
+
   listOfType: any[] = [
     "Cardio",
     "Strength",
@@ -55,12 +57,20 @@ export class WorkoutComponent {
       date: [null, [Validators.required]],
       caloriesBurned: [null, [Validators.required]]
     })
+    this.getWorkouts();
+  }
+
+  getWorkouts(){
+    this.userService.getWorkouts().subscribe(res=>{
+      this.workouts = res;
+    })
   }
 
   submitForm(){
     this.userService.postWorkout(this.workoutForm.value).subscribe(res=>{
       this.message.success("Workout posted successfully", {nzDuration: 5000});
       this.workoutForm.reset();
+      this.getWorkouts();
     }, error=>{
       this.message.error("Error while posting workout", {nzDuration: 5000});
     })
