@@ -57,4 +57,13 @@ export class WorkoutComponent {
     })
   }
 
+  submitForm(){
+    this.userService.postWorkout(this.workoutForm.value).subscribe(res=>{
+      this.message.success("Workout posted successfully", {nzDuration: 5000});
+      this.workoutForm.reset();
+    }, error=>{
+      this.message.error("Error while posting workout", {nzDuration: 5000});
+    })
+  }
+
 }
