@@ -26,4 +26,13 @@ public class GoalController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong!!!");
         }
     }
+
+    @GetMapping("/goals")
+    public ResponseEntity<?> getGoals() {
+        try {
+            return ResponseEntity.ok(goalService.getGoals());
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong!!!");
+        }
+    }
 }

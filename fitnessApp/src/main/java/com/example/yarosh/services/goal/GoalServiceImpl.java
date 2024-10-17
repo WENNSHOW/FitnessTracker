@@ -6,6 +6,9 @@ import com.example.yarosh.repository.GoalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class GoalServiceImpl implements GoalService {
@@ -22,5 +25,12 @@ public class GoalServiceImpl implements GoalService {
         goal.setAchieved(false);
 
         return goalRepository.save(goal).getGoalDTO();
+    }
+
+    @Override
+    public List<GoalDTO> getGoals() {
+        List<Goal> goals = goalRepository.findAll();
+
+        return goals.stream().map(Goal::getGoalDTO).collect(Collectors.toList());
     }
 }
