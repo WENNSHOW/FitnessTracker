@@ -34,19 +34,22 @@
 
         </div>
         <div nz-col nzFlex="3" style="margin-left: 20px;">
-            <!-- <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Past Activites"> 
-                <div nz-card-grid style="width: 100%;" *ngFor="let activity of activities"> 
+            <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Past Goals"> 
+                <div nz-card-grid style="width: 100%;" *ngFor="let goal of goals"> 
                     <div nz-col nzSpan="30">
-                        Calories Burned: <strong>{{activity.caloriesBurned}}</strong>
+                        Description: <strong>{{goal.description}}</strong>
                         -
-                        Distance: <strong>{{activity.distance}}</strong> KM
+                        Start date: <strong>{{goal.startDate | date}}</strong>
                         -
-                        Steps: <strong>{{activity.steps}}</strong>
+                        End date: <strong>{{goal.endDate | date}}</strong>
                         -
-                        Date: <strong>{{activity.date | date}}</strong>
+                        Achieved: <strong>{{goal.achieved}}</strong>
+
+                        <span *ngIf="!goal.achieved" nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'"
+                        [nzTwotoneColor]="'52c41a'" style="margin-left: 15px;"></span>
                     </div>
                 </div>
-            </nz-card> -->
+            </nz-card>
         </div>
     </div>
 </div>

@@ -19,6 +19,7 @@ export class GoalComponent {
   };
 
   goalForm!: FormGroup;
+  goals:any;
 
   constructor(private fb: FormBuilder, 
     private message: NzMessageService,
@@ -31,15 +32,24 @@ export class GoalComponent {
       startDate: [null, [Validators.required]], 
       endDate: [null, [Validators.required]], 
     });
+
+    this.getAllGoals();
   }
 
   submitForm(){
     this.userService.postGoal(this.goalForm.value).subscribe(res=>{
       this.message.success("Goal posted successfully", {nzDuration: 5000});
       this.goalForm.reset();
-      // this.getWorkouts();
+      this.getAllGoals();
     }, error=>{
       this.message.error("Error while posting goal", {nzDuration: 5000});
+    })
+  }
+
+  getAllGoals(){
+    this.userService.getGoals().subscribe(res=>{
+      this.goals=res;
+      console.log(this.goals);
     })
   }
 }
