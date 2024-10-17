@@ -6,7 +6,7 @@
     <div nz-row>
         <div nz-col nzFlex="2">
             <nz-card nzType="inner" style="margin-top:16px;" nzTitle="Post New Goal">
-                <form nz-form [formGroup]="goalForm" class="custom-form">
+                <form nz-form [formGroup]="goalForm" class="custom-form" (ngSubmit)="submitForm()">
                     <nz-form-item>
                         <nz-form-control>
                             <textarea nz-input placeholder="Enter description" 
@@ -26,7 +26,7 @@
                         </nz-form-control>
                     </nz-form-item>
 
-                    <button nz-button nzType="primary" nzBlock class="w-100" [disabled]="goalForm.invalid">
+                    <button nz-button nzType="primary" nzBlock class="w-100" [disabled]="goalForm.invalid"> 
                         Post Goal
                     </button>
                 </form>
