@@ -3,10 +3,12 @@ package com.example.yarosh.services.goal;
 import com.example.yarosh.dto.GoalDTO;
 import com.example.yarosh.entity.Goal;
 import com.example.yarosh.repository.GoalRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,5 +34,19 @@ public class GoalServiceImpl implements GoalService {
         List<Goal> goals = goalRepository.findAll();
 
         return goals.stream().map(Goal::getGoalDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public GoalDTO updateStatus(Long id) {
+        Optional<Goal> goal = goalRepository.findById(Math.toIntExact(id));
+
+        if (goal.isPresent()) {
+            Goal updatedGoal = goal.get();
+            updatedGoal.setAchieved(true);
+            return goalRepository.save(updatedGoal).getGoalDTO();
+        }
+        else{
+            throw new EntityNotFoundException();
+        }
     }
 }
