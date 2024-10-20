@@ -14,4 +14,6 @@ public class StatsDTO {
     private Double distance;
 
     private int totalCaloriesBurned;
+
+    private int duration;
 }

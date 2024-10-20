@@ -15,5 +15,5 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     Double getTotalDistance();
 
     @Query("select sum(a.caloriesBurned) from Activity a")
-    Integer getTotalCaloriesBurned();
+    Integer getTotalActivityCaloriesBurned();
 }
