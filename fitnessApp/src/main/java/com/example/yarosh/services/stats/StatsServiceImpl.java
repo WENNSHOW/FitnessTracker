@@ -1,11 +1,19 @@
 package com.example.yarosh.services.stats;
 
+import com.example.yarosh.dto.GraphDTO;
 import com.example.yarosh.dto.StatsDTO;
+import com.example.yarosh.entity.Activity;
+import com.example.yarosh.entity.Workout;
 import com.example.yarosh.repository.ActivityRepository;
 import com.example.yarosh.repository.GoalRepository;
 import com.example.yarosh.repository.WorkoutRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +51,20 @@ public class StatsServiceImpl implements StatsService {
         dto.setTotalCaloriesBurned(totalCaloriesBurned);
 
         dto.setDuration(totalDuration != null ? totalDuration : 0);
+
+        return dto;
+    }
+
+    @Override
+    public GraphDTO getGraphStats(){
+        Pageable pageable = PageRequest.of(0, 7);
+
+        List<Workout> workouts = workoutRepository.findLast7Workouts(pageable);
+        List<Activity> activities = activityRepository.findLast7Activities(pageable);
+
+        GraphDTO dto = new GraphDTO();
+        dto.setWorkouts(workouts.stream().map(Workout::getWorkoutDTO).collect(Collectors.toList()));
+        dto.setActivities(activities.stream().map(Activity::getActivityDTO).collect(Collectors.toList()));
 
         return dto;
     }
