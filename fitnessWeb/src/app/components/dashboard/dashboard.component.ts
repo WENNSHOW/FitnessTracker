@@ -85,6 +85,46 @@ export class DashboardComponent {
         }
       }
     });
+
+    new Chart(activityCtx, {
+      type: 'line',
+      data: {
+        labels: this.activities.map((data: {date:any;})=> this.datePipe.transform(data.date, 'MM/dd')),
+        datasets: [
+          {
+          label: 'Calories Burned',
+          data: this.activities.map((data: {caloriesBurned:any;})=>data.caloriesBurned),
+          fill: false,
+            borderWidth: 2,
+            backgroundColor: 'rgba(255, 100, 100, 0.6)',
+            borderColor: 'rgba(255, 0, 0, 1)',
+        },
+        {
+          label: 'Steps',
+          data: this.activities.map((data: {steps:any; })=> data.steps),
+          fill: false,
+            borderWidth: 2,
+            backgroundColor: 'rgba(255, 180, 120, 0.6)',
+            borderColor: 'rgba(255, 100, 0, 1)',
+        },
+        {
+          label: 'Distance',
+          data: this.activities.map((data: {distance:any;})=>data.distance),
+          fill: false,
+            borderWidth: 2,
+            backgroundColor: 'rgba(255, 200, 200, 0.6)',
+            borderColor: 'rgba(255, 0, 100, 1)',
+        }
+      ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   }
 
   getStats(){
