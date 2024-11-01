@@ -5,6 +5,8 @@ import com.example.yarosh.dto.ActivityDTO;
 import com.example.yarosh.entity.Activity;
 import com.example.yarosh.services.activity.ActivityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,5 +39,15 @@ public class ActivityController {
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong!!!");
         }
+    }
+
+    @QueryMapping("getGraphActivities")
+    public Iterable<Activity> getGraphActivities(){
+        return activityService.getGraphActivities();
+    }
+
+    @QueryMapping
+    public Activity getActivityById(@Argument Long id){
+        return activityService.getActivityById(id);
     }
 }

@@ -1,8 +1,11 @@
 package com.example.yarosh.controller;
 
 import com.example.yarosh.dto.GoalDTO;
+import com.example.yarosh.entity.Goal;
 import com.example.yarosh.services.goal.GoalService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +46,15 @@ public class GoalController {
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Goal not found.");
         }
+    }
+
+    @QueryMapping("getGraphGoals")
+    public Iterable<Goal> getGraphGoals(){
+        return goalService.getGraphGoals();
+    }
+
+    @QueryMapping
+    public Goal getGoalById(@Argument Long id){
+        return goalService.getGoalById(id);
     }
 }

@@ -49,4 +49,14 @@ public class GoalServiceImpl implements GoalService {
             throw new EntityNotFoundException();
         }
     }
+
+    @Override
+    public Iterable<Goal> getGraphGoals() {
+        return goalRepository.findAll();
+    }
+
+    @Override
+    public Goal getGoalById(Long id) {
+        return goalRepository.findById(Math.toIntExact(id)).orElseThrow(EntityNotFoundException::new);
+    }
 }

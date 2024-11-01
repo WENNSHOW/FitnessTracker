@@ -34,5 +34,15 @@ public class WorkoutServiceImpl implements WorkoutService {
         return workouts.stream().map(Workout::getWorkoutDTO).collect(Collectors.toList());
     }
 
+    @Override
+    public Iterable<Workout> getGraphWorkouts() {
+        return workoutRepository.findAll();
+    }
+
+    @Override
+    public Workout getWorkoutById(Long id) {
+        return workoutRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
 
 }
