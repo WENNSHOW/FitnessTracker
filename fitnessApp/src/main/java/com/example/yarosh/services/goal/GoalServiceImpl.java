@@ -6,6 +6,7 @@ import com.example.yarosh.repository.GoalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ public class GoalServiceImpl implements GoalService {
     private final GoalRepository goalRepository;
 
     @Override
+    @Transactional
     public GoalDTO postGoal(GoalDTO goalDTO) {
         Goal goal = new Goal();
 

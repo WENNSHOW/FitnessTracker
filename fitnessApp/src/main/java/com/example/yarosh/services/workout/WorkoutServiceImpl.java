@@ -5,6 +5,7 @@ import com.example.yarosh.entity.Workout;
 import com.example.yarosh.repository.WorkoutRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ public class WorkoutServiceImpl implements WorkoutService {
     private final WorkoutRepository workoutRepository;
 
     @Override
+    @Transactional
     public WorkoutDTO postWorkout(WorkoutDTO workoutDTO) {
         Workout workout = new Workout();
 
